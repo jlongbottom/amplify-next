@@ -81,10 +81,10 @@ export default function App() {
       );
     }
   }
-  const Lap = (props: { index: number, lap: number, onDelete: () => {} }) => (
-    <div key={props.index} className="stopwatch-lap">
-      <strong>{props.index}</strong>/ {formattedSeconds(props.lap)} <button
-        onClick={props.onDelete} > X </button>
+  const Lap = ({ index, lap, onDelete }: { index: number; lap: number; onDelete: () => void }) => (
+    <div className="stopwatch-lap">
+      <strong>{index}</strong>/ {formattedSeconds(lap)}{' '}
+      <button onClick={onDelete}>X</button>
     </div>
   );
 
