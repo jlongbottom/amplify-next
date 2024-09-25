@@ -20,6 +20,10 @@ export default function App() {
         lastClearedIncrementer: null,
       }
       this.laps = [];
+      this.handleStartClick = this.handleStartClick.bind(this);
+      this.handleStopClick = this.handleStopClick.bind(this);
+      this.handleResetClick = this.handleResetClick.bind(this);
+      this.handleLapClick = this.handleLapClick.bind(this);
     }
     handleStartClick() {
       this.incrementer = setInterval(() =>
@@ -40,7 +44,7 @@ export default function App() {
           secondsElapsed: 0,
         });
     }
-    handleLabClick() {
+    handleLapClick() {
       this.laps = this.laps.concat([this.state.secondsElapsed]);
       this.forceUpdate();
     }
@@ -62,7 +66,7 @@ export default function App() {
               onClick={this.handleStopClick}>stop</button>
           )}
           {(secondsElapsed !== 0 && this.incrementer !== lastClearedIncrementer
-            ? <button type="button" onClick={this.handleLabClick}>lap</button>
+            ? <button type="button" onClick={this.handleLapClick}>lap</button>
             : null
           )}
           {(secondsElapsed !== 0 && this.incrementer === lastClearedIncrementer
