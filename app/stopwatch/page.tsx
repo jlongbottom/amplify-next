@@ -75,7 +75,7 @@ export default function App() {
           )}
           <div className="stopwatch-laps">
             {this.laps && this.laps.map((lap, i) =>
-              <Lap index={i + 1} lap={lap} onDelete={this.handleDeleteClick(i)} />)}
+              <Lap key={i} index={i + 1} lap={lap} onDelete={this.handleDeleteClick(i)} />)}
           </div>
         </div>
       );
