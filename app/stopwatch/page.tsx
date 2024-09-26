@@ -21,12 +21,14 @@ export default function App() {
     };
 
     const handleStopClick = () => {
-      clearInterval(incrementer);
-      setLastClearedIncrementer(incrementer);
+      if (incrementer) {
+        clearInterval(incrementer);
+        setLastClearedIncrementer(incrementer);
+      }
     };
 
     const handleResetClick = () => {
-      clearInterval(incrementer);
+      if(incrementer) clearInterval(incrementer);
       setSecondsElapsed(initialSeconds);
       setLaps([]);
       setIncrementer(null);
