@@ -1,20 +1,25 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import data from "./data.json";
 
-interface StringListProps {
-  items?: string[];
+interface Person {
+  id: number;
+  name: string;
+  age: number;
 }
 
-const StringList: React.FC<StringListProps> = ({ items = ["test", "justin"] }) => {
-  const [filter, setFilter] = useState<string>('');
+const people: Person[] = data;
+
+const StringList: React.FC = () => {
+  const [filter, setFilter] = useState<string>("");
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
   };
 
-  const filteredItems = items.filter((item) =>
-    item.toLowerCase().includes(filter.toLowerCase())
+  const filteredItems = people.filter((person) =>
+    person.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
@@ -27,7 +32,7 @@ const StringList: React.FC<StringListProps> = ({ items = ["test", "justin"] }) =
       />
       <ul>
         {filteredItems.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index}>{item.name}</li>
         ))}
       </ul>
     </div>
