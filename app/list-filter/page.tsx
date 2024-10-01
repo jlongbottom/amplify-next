@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import data from "./data.json";
@@ -13,6 +13,7 @@ const people: Person[] = data;
 
 const StringList: React.FC = () => {
   const [filter, setFilter] = useState<string>("");
+  const [sort, setSort] = useState<string>("");
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
@@ -22,8 +23,17 @@ const StringList: React.FC = () => {
     person.name.toLowerCase().includes(filter.toLowerCase())
   );
 
+  if (sort === "name") {
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sort === "age") {
+    filteredItems.sort((a, b) => a.age - b.age);
+  }
+
   return (
     <div>
+      <button onClick={() => setSort("name")}>Sort by name</button>
+      <button onClick={() => setSort("age")}>Sort by age</button>
+      <br />
       <input
         type="text"
         value={filter}
@@ -32,7 +42,9 @@ const StringList: React.FC = () => {
       />
       <ul>
         {filteredItems.map((item, index) => (
-          <li key={index}>{item.name}</li>
+          <li key={index}>
+            {item.name}, {item.age}
+          </li>
         ))}
       </ul>
     </div>
